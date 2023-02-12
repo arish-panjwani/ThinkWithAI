@@ -84,4 +84,6 @@ export const Strings = {
   INFO: 'Info',
   AW_SNAP: 'Aw Snap!',
   OHH_NO: 'Ohh No!',
+
+  // RN-paper addition trial push
 };
