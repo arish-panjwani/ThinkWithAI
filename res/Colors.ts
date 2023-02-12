@@ -1,0 +1,15 @@
+export const Colors = {
+  black: '#000',
+  white: '#FFF',
+  textColor: '#333333',
+  primaryColor: '#08969B',
+  primaryDisabledColor: '#08969B44',
+  borderColor: '#323B61',
+  errorColor: '#DB2700',
+  darkBgColor: '#000',
+  labelColor: '#CCCCCC',
+  commonTextColor: '#FFF',
+  textInputBgColor: '#1D1D1D',
+  textInputColor: '#808080',
+  placeHolderColor: '#858585',
+};
