@@ -1,5 +1,7 @@
-import {ResponsiveFontValue as RFValue} from '@utils/ResponsiveFonts';
-import {StyleSheet} from 'react-native';
+/** @format */
+
+import { ResponsiveFontValue as RFValue } from "@utils/ResponsiveFonts";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   fontSubHeading: {
@@ -12,6 +14,9 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(20),
   },
   fontDescription: {
+    fontSize: RFValue(18),
+  },
+  fontLargeDescription: {
     fontSize: RFValue(18),
   },
   fontBody: {
@@ -27,15 +32,15 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(10),
   },
   weightLight: {
-    fontWeight: '200',
+    fontWeight: "200",
   },
   weightRegular: {
-    fontWeight: 'normal',
+    fontWeight: "normal",
   },
   weightMedium: {
-    fontWeight: '600',
+    fontWeight: "600",
   },
   weightBold: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });

@@ -36,8 +36,10 @@ const {
   labelColor,
 } = Colors;
 
-const ProfileDetails = (props: DashboardProps) => {
+const ChatScreen = (props: DashboardProps) => {
   const { route, navigation } = props;
+  const { params } = route;
+  const { title } = params;
 
   const renderItemDataView = useCallback(
     (label: string, value: string | number, style?: object) => {
@@ -81,7 +83,7 @@ const ProfileDetails = (props: DashboardProps) => {
   return (
     <SafeAreaView style={[flexOne, { backgroundColor: darkBgColor }]}>
       <View style={[flexOne, marginHorizontalSeven]}>
-        <Header navigation={navigation} title={PROFILE_DETAILS} />
+        <Header navigation={navigation} title={title} />
         {renderUserDataView()}
       </View>
       <TouchableOpacity
@@ -104,4 +106,4 @@ const ProfileDetails = (props: DashboardProps) => {
   );
 };
 
-export default ProfileDetails;
+export default ChatScreen;
