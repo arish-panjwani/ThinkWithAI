@@ -1,10 +1,13 @@
-import TextView from '@components/TextView/TextView';
-import {Colors} from '@resources/Colors';
-import {CommonStyles} from '@resources/CommonStyles';
-import {HeaderProps} from '@resources/Types';
-import React, {useCallback} from 'react';
-import {View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+/** @format */
+
+import TextView from "@components/TextView/TextView";
+import { Colors } from "@resources/Colors";
+import { CommonStyles } from "@resources/CommonStyles";
+import { HeaderProps } from "@resources/Types";
+import React, { useCallback } from "react";
+import { View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 const {
   flexOne,
@@ -14,20 +17,24 @@ const {
   flexDirectionRow,
 } = CommonStyles;
 
-const {white} = Colors;
+const { white, primaryColor } = Colors;
 
 const Header = (props: HeaderProps) => {
-  const {navigation, title} = props;
+  const { navigation, title } = props;
   const onBackPress = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
 
   return (
-    <View style={[flexDirectionRow, marginHorizontalTwo, marginTopThree]}>
+    <View
+      style={[
+        flexDirectionRow,
+        marginHorizontalTwo,
+        alignItemsCenter,
+        marginTopThree,
+      ]}>
       <TouchableOpacity onPress={onBackPress}>
-        <TextView medium color={white} subHeading>
-          {'<'}
-        </TextView>
+        <AntDesign name="left" style={{ color: primaryColor, fontSize: 30 }} />
       </TouchableOpacity>
       <View style={[flexOne, alignItemsCenter]}>
         <TextView color={white} medium subHeading>

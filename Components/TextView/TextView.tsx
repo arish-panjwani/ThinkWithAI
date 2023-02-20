@@ -1,13 +1,15 @@
-import {styles} from '@components/TextView/TextViewStyles';
-import {Colors} from '@resources/Colors';
-import {TextViewProps} from '@resources/Types';
-import React from 'react';
-import {Text} from 'react-native';
+/** @format */
 
-const {textColor} = Colors;
+import { styles } from "@components/TextView/TextViewStyles";
+import { Colors } from "@resources/Colors";
+import { TextViewProps } from "@resources/Types";
+import React from "react";
+import { Text } from "react-native";
+
+const { textColor } = Colors;
 
 const TextView = (props: TextViewProps) => {
-  const getTextSizes = (fontSize: {fontSize: number}) => {
+  const getTextSizes = (fontSize: { fontSize: number }) => {
     return fontSize.fontSize;
   };
 
@@ -16,6 +18,7 @@ const TextView = (props: TextViewProps) => {
       fontSubHeading,
       fontLargeTitle,
       fontTitle,
+      fontLargeDescription,
       fontDescription,
       fontBody,
       fontNote,
@@ -33,6 +36,7 @@ const TextView = (props: TextViewProps) => {
       subHeading,
       largeTitle,
       title,
+      largeDescription,
       description,
       body,
       note,
@@ -46,7 +50,7 @@ const TextView = (props: TextViewProps) => {
     } = props;
 
     let defaultWeight: {
-      fontWeight: 'normal' | '200' | '600' | 'bold';
+      fontWeight: "normal" | "200" | "600" | "bold";
     } = weightRegular;
     if (regular) {
       defaultWeight = weightRegular;
@@ -59,27 +63,44 @@ const TextView = (props: TextViewProps) => {
     }
 
     let defaultStyle = [
-      {fontSize: getTextSizes(fontDescription)},
+      { fontSize: getTextSizes(fontDescription) },
       defaultWeight,
     ];
 
     let defaultColor = textColor;
     if (subHeading) {
-      defaultStyle = [{fontSize: getTextSizes(fontSubHeading)}, defaultWeight];
+      defaultStyle = [
+        { fontSize: getTextSizes(fontSubHeading) },
+        defaultWeight,
+      ];
     } else if (largeTitle) {
-      defaultStyle = [{fontSize: getTextSizes(fontLargeTitle)}, defaultWeight];
+      defaultStyle = [
+        { fontSize: getTextSizes(fontLargeTitle) },
+        defaultWeight,
+      ];
     } else if (title) {
-      defaultStyle = [{fontSize: getTextSizes(fontTitle)}, defaultWeight];
+      defaultStyle = [{ fontSize: getTextSizes(fontTitle) }, defaultWeight];
+    } else if (largeDescription) {
+      defaultStyle = [
+        { fontSize: getTextSizes(fontLargeDescription) },
+        defaultWeight,
+      ];
     } else if (description) {
-      defaultStyle = [{fontSize: getTextSizes(fontDescription)}, defaultWeight];
+      defaultStyle = [
+        { fontSize: getTextSizes(fontDescription) },
+        defaultWeight,
+      ];
     } else if (body) {
-      defaultStyle = [{fontSize: getTextSizes(fontBody)}, defaultWeight];
+      defaultStyle = [{ fontSize: getTextSizes(fontBody) }, defaultWeight];
     } else if (note) {
-      defaultStyle = [{fontSize: getTextSizes(fontNote)}, defaultWeight];
+      defaultStyle = [{ fontSize: getTextSizes(fontNote) }, defaultWeight];
     } else if (small) {
-      defaultStyle = [{fontSize: getTextSizes(fontSmall)}, defaultWeight];
+      defaultStyle = [{ fontSize: getTextSizes(fontSmall) }, defaultWeight];
     } else if (extraSmall) {
-      defaultStyle = [{fontSize: getTextSizes(fontExtraSmall)}, defaultWeight];
+      defaultStyle = [
+        { fontSize: getTextSizes(fontExtraSmall) },
+        defaultWeight,
+      ];
     }
 
     if (color !== undefined) {
