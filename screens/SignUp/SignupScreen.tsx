@@ -1,5 +1,3 @@
-/** @format */
-
 import TextView from '@components/TextView/TextView';
 import {LOGIN_SCREEN_KEY} from '@navigation/Routes';
 import {Colors} from '@resources/Colors';

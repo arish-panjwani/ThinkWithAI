@@ -1,33 +1,29 @@
-/** @format */
-
-import TextView from "@components/TextView/TextView";
-import { DASHBOARD_SCREEN_KEY, SIGNUP_SCREEN_KEY } from "@navigation/Routes";
-import { Colors } from "@resources/Colors";
-import { CommonStyles } from "@resources/CommonStyles";
-import { Strings } from "@resources/Strings";
+import TextView from '@components/TextView/TextView';
+import {DASHBOARD_SCREEN_KEY, SIGNUP_SCREEN_KEY} from '@navigation/Routes';
+import {Colors} from '@resources/Colors';
+import {CommonStyles} from '@resources/CommonStyles';
+import {Strings} from '@resources/Strings';
 import {
   FunctionReturnAnyWithParams,
   LoginScreenProps,
   ObjectOrArray,
-} from "@resources/Types";
+} from '@resources/Types';
 import {
   getPreferences,
   PREF_ALL_USER_CREDENTIALS,
   PREF_REMEMBERED_CREDENTIAL,
   setPreferences,
-} from "@utils/AsyncStorageHelper";
-import { ResponsiveFontValue as RFValue } from "@utils/ResponsiveFonts";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+} from '@utils/AsyncStorageHelper';
+import {ResponsiveFontValue as RFValue} from '@utils/ResponsiveFonts';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   Alert,
   SafeAreaView,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
-import ToggleSwitch from "toggle-switch-react-native";
-import AntDesign from "react-native-vector-icons/AntDesign";
+} from 'react-native';
+import ToggleSwitch from 'toggle-switch-react-native';
 
 const {
   flexOne,
@@ -82,11 +78,11 @@ const {
   commonTextColor,
 } = Colors;
 
-const LoginScreen: React.FC<LoginScreenProps> = (props) => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [emailError, setEmailError] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
+const LoginScreen: React.FC<LoginScreenProps> = props => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [emailError, setEmailError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
   const [isRememberEnabled, setIsRememberEnabled] = useState(false);
   const existingUserData: ObjectOrArray = useRef<ObjectOrArray>([]);
   const rememberedData: ObjectOrArray = useRef<ObjectOrArray>([]);
@@ -97,7 +93,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
 
   const setRememberedData = async () => {
     rememberedData.current = await getPreferences(PREF_REMEMBERED_CREDENTIAL);
-    if (![null, "", undefined].includes(rememberedData.current)) {
+    if (![null, '', undefined].includes(rememberedData.current)) {
       const rememberedParsedData = JSON.parse(rememberedData.current);
       setEmail(rememberedParsedData.email);
       setPassword(rememberedParsedData.password);
@@ -106,18 +102,18 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
   };
 
   const clearErrorStates = () => {
-    setEmailError("");
-    setPasswordError("");
+    setEmailError('');
+    setPasswordError('');
   };
 
   const clearValueStates = () => {
-    setEmail("");
-    setPassword("");
+    setEmail('');
+    setPassword('');
   };
 
-  const { navigation } = props;
+  const {navigation} = props;
 
-  const isDisabled = email === "" || password === "";
+  const isDisabled = email === '' || password === '';
 
   const labelValItem: FunctionReturnAnyWithParams = useCallback(
     (
@@ -126,12 +122,12 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
       setValue: FunctionReturnAnyWithParams,
       validDataTxt: string,
       errorMsg: string,
-      secureTextEntry = false
+      secureTextEntry = false,
     ): JSX.Element => {
-      const isError = errorMsg !== "";
+      const isError = errorMsg !== '';
       const errorStyle = isError
         ? [
-            { borderColor: errorColor },
+            {borderColor: errorColor},
             paddingPointTwoFive,
             borderRadiusThreeHalf,
             borderWidthPointTwo,
@@ -143,13 +139,13 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
           <View style={[errorStyle, marginTopOne, borderRadiusThree]}>
             <TextInput
               onFocus={clearErrorStates}
-              onChangeText={(val) => {
+              onChangeText={val => {
                 val = val.trim();
                 setValue(val);
               }}
               placeholder={validDataTxt}
               placeholderTextColor={placeHolderColor}
-              autoCapitalize={"none"}
+              autoCapitalize={'none'}
               style={[
                 paddingHorizontalThree,
                 paddingVerticalOne,
@@ -164,7 +160,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
               secureTextEntry={secureTextEntry}
             />
           </View>
-          {errorMsg && errorMsg !== "" && (
+          {errorMsg && errorMsg !== '' && (
             <View>
               <TextView color={errorColor} note>
                 {errorMsg}
@@ -174,7 +170,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
         </View>
       );
     },
-    []
+    [],
   );
 
   const navigateTo: FunctionReturnAnyWithParams = useCallback(
@@ -187,13 +183,13 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
         navigation.navigate(key, params);
       }, 0);
     },
-    [navigation, isRememberEnabled]
+    [navigation, isRememberEnabled],
   );
 
   const validate: FunctionReturnAnyWithParams = useCallback(() => {
     let isValid = true;
     // Email Validation
-    if (!(email.includes("@") && email.includes("."))) {
+    if (!(email.includes('@') && email.includes('.'))) {
       isValid = false;
       setEmailError(INVALID_EMAIL);
     }
@@ -209,10 +205,10 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
   const getDataInPreference: FunctionReturnAnyWithParams =
     useCallback(async () => {
       const allUserData: string | null = await getPreferences(
-        PREF_ALL_USER_CREDENTIALS
+        PREF_ALL_USER_CREDENTIALS,
       );
       const parsedAllData =
-        allUserData && allUserData !== undefined && allUserData !== ""
+        allUserData && allUserData !== undefined && allUserData !== ''
           ? JSON.parse(allUserData)
           : [];
 
@@ -222,7 +218,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
           email: string;
           mobileNo: string;
           password: string;
-        }): boolean => item.email === email
+        }): boolean => item.email === email,
       );
 
       // Check if data exists
@@ -232,7 +228,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
           if (isRememberEnabled) {
             setPreferences(
               PREF_REMEMBERED_CREDENTIAL,
-              JSON.stringify(existingUserData.current)
+              JSON.stringify(existingUserData.current),
             );
           }
           return true;
@@ -244,7 +240,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
   const onLoginSuccess = useCallback(() => {
     setPreferences(
       PREF_REMEMBERED_CREDENTIAL,
-      isRememberEnabled ? JSON.stringify(existingUserData.current) : ""
+      isRememberEnabled ? JSON.stringify(existingUserData.current) : '',
     );
     navigateTo(DASHBOARD_SCREEN_KEY, existingUserData.current);
   }, [isRememberEnabled, navigateTo]);
@@ -276,14 +272,14 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
           setPassword,
           PASS_PLACEHOLDER,
           passwordError,
-          true
+          true,
         )}
       </>
     );
   }, [email, emailError, labelValItem, password, passwordError]);
 
   return (
-    <SafeAreaView style={[flexOne, { backgroundColor: darkBgColor }]}>
+    <SafeAreaView style={[flexOne, {backgroundColor: darkBgColor}]}>
       <View style={[marginHorizontalSeven]}>
         <View
           style={[
@@ -292,11 +288,12 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
             alignSelfCenter,
             alignItemsCenter,
           ]}>
-          {/* <AntDesign name="bulb1" style={{ color: "yellow", fontSize: 35 }} /> */}
           <TextView color={white} subHeading medium>
-            {` ${THINK_WITH_AI} `}
+            {` ${THINK_WITH_AI}`}
           </TextView>
-          <AntDesign name="bulb1" style={{ color: "yellow", fontSize: 35 }} />
+          <TextView color={white} subHeading medium>
+            💡
+          </TextView>
         </View>
         {renderInputFields()}
         {!isDisabled && (

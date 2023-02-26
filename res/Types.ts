@@ -1,10 +1,8 @@
-/** @format */
-
 export type FunctionReturnAnyWithParams = (...args: any[]) => any;
 
 export type ObjectOrArray = Record<string, any> | any[];
 
-export type routeType = { params: any };
+export type routeType = {params: any};
 
 export type NavigationProps = {
   navigate?: FunctionReturnAnyWithParams;
@@ -17,9 +15,9 @@ export type MainNavigatorProps = {
   onNavigationStateChange?: FunctionReturnAnyWithParams;
 };
 
-export type LoginScreenProps = { navigation?: any };
+export type LoginScreenProps = {navigation?: any};
 
-export type SignupScreenProps = { navigation?: any };
+export type SignupScreenProps = {navigation?: any};
 
 export type DashboardProps = {
   navigation?: any;
@@ -34,11 +32,11 @@ export type DashboardProps = {
   };
 };
 
-export type UploadFilesProps = { navigation: any; route: routeType };
+export type UploadFilesProps = {navigation: any; route: routeType};
 
-export type ViewFilesProps = { navigation: any };
+export type ViewFilesProps = {navigation: any};
 
-export type HeaderProps = { navigation: any; title: string };
+export type HeaderProps = {navigation: any; title: string};
 
 export type TextViewProps = {
   children: string | number;
