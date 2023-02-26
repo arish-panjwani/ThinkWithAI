@@ -7,7 +7,6 @@ import {Strings} from '@resources/Strings';
 import {DashboardProps, FunctionReturnAnyWithParams} from '@resources/Types';
 import React, {useCallback} from 'react';
 import {SafeAreaView, TouchableOpacity, View} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const {
   marginHorizontalSeven,
@@ -25,14 +24,8 @@ const {
 
 const {EMAIL, PROFILE_DETAILS, MOBILE_NUMBER, LOGOUT} = Strings;
 
-const {
-  white,
-  primaryColor,
-  errorColor,
-  darkBgColor,
-  textInputBgColor,
-  labelColor,
-} = Colors;
+const {primaryColor, errorColor, darkBgColor, textInputBgColor, labelColor} =
+  Colors;
 
 const ProfileDetails = (props: DashboardProps) => {
   const {route, navigation} = props;
@@ -85,14 +78,10 @@ const ProfileDetails = (props: DashboardProps) => {
       <TouchableOpacity
         style={[flexDirectionRow, alignSelfCenter]}
         onPress={onLogoutPress}>
-        <View
-          style={[
-            {
-              transform: [{rotate: '180deg'}],
-            },
-            marginBottomSix,
-          ]}>
-          <AntDesign name="logout" style={{color: errorColor, fontSize: 40}} />
+        <View style={[marginBottomSix]}>
+          <TextView color={errorColor} title medium>
+            {LOGOUT}
+          </TextView>
         </View>
       </TouchableOpacity>
     </SafeAreaView>

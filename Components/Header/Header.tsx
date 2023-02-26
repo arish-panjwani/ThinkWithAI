@@ -5,7 +5,6 @@ import {HeaderProps} from '@resources/Types';
 import React, {useCallback} from 'react';
 import {View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const {
   flexOne,
@@ -15,7 +14,7 @@ const {
   flexDirectionRow,
 } = CommonStyles;
 
-const {white, primaryColor} = Colors;
+const {white} = Colors;
 
 const Header = (props: HeaderProps) => {
   const {navigation, title} = props;
@@ -32,7 +31,9 @@ const Header = (props: HeaderProps) => {
         marginTopThree,
       ]}>
       <TouchableOpacity onPress={onBackPress}>
-        <AntDesign name="left" style={{color: primaryColor, fontSize: 30}} />
+        <TextView color={white} subHeading medium>
+          🔙
+        </TextView>
       </TouchableOpacity>
       <View style={[flexOne, alignItemsCenter]}>
         <TextView color={white} medium subHeading>

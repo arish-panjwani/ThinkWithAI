@@ -19,13 +19,11 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   Alert,
   SafeAreaView,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const {
   flexOne,
@@ -290,11 +288,12 @@ const LoginScreen: React.FC<LoginScreenProps> = props => {
             alignSelfCenter,
             alignItemsCenter,
           ]}>
-          {/* <AntDesign name="bulb1" style={{ color: "yellow", fontSize: 35 }} /> */}
           <TextView color={white} subHeading medium>
-            {` ${THINK_WITH_AI} `}
+            {` ${THINK_WITH_AI}`}
           </TextView>
-          <AntDesign name="bulb1" style={{color: 'yellow', fontSize: 35}} />
+          <TextView color={white} subHeading medium>
+            💡
+          </TextView>
         </View>
         {renderInputFields()}
         {!isDisabled && (

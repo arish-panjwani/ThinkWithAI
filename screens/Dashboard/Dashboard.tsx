@@ -12,7 +12,6 @@ import {
 import React, {useCallback, useState} from 'react';
 import {SafeAreaView, TextInput, TouchableOpacity, View} from 'react-native';
 import {Button, Modal, Portal, Provider} from 'react-native-paper';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const {
   flexOne,
@@ -180,8 +179,9 @@ const Dashboard = (props: DashboardProps) => {
 
   const onPressStartChatting = useCallback(() => {
     setGiveNameModal(false);
+    console.info('aiName', aiName);
     navigateTo(CHAT_SCREEN_KEY, {title: aiName});
-  }, []);
+  }, [aiName]);
 
   const giveNameView = useCallback(() => {
     const errorStyle = false
@@ -281,10 +281,23 @@ const Dashboard = (props: DashboardProps) => {
               {DASHBOARD}
             </TextView>
             <TouchableOpacity onPress={onSettingsPress}>
-              <AntDesign
-                name="setting"
-                style={{color: primaryColor, fontSize: 35}}
-              />
+              <View
+                style={[
+                  {
+                    height: hp(5),
+                    width: hp(5),
+                    borderRadius: hp(2.5),
+                  },
+                  justifyContentCenter,
+                ]}>
+                <TextView
+                  style={[alignSelfCenter, {fontSize: RFValue(25)}]}
+                  color={white}
+                  medium
+                  title>
+                  ⚙
+                </TextView>
+              </View>
             </TouchableOpacity>
           </View>
           <TextView
