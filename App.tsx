@@ -1,12 +1,10 @@
-/** @format */
-
-import { renderCommonScreens } from "@navigation/CommonScreens";
-import { LOGIN_SCREEN_KEY } from "@navigation/Routes";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "@screens/Login/LoginScreen";
-import React, { useRef } from "react";
-import { Provider as PaperProvider } from "react-native-paper";
+import {renderCommonScreens} from '@navigation/CommonScreens';
+import {LOGIN_SCREEN_KEY} from '@navigation/Routes';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import LoginScreen from '@screens/Login/LoginScreen';
+import React, {useRef} from 'react';
+import {Provider as PaperProvider} from 'react-native-paper';
 
 const MainStack = createStackNavigator();
 

@@ -1,15 +1,13 @@
-/** @format */
-
-import Header from "@components/Header/Header";
-import TextView from "@components/TextView/TextView";
-import { LOGIN_SCREEN_KEY } from "@navigation/Routes";
-import { Colors } from "@resources/Colors";
-import { CommonStyles } from "@resources/CommonStyles";
-import { Strings } from "@resources/Strings";
-import { DashboardProps, FunctionReturnAnyWithParams } from "@resources/Types";
-import React, { useCallback } from "react";
-import { SafeAreaView, TouchableOpacity, View } from "react-native";
-import AntDesign from "react-native-vector-icons/AntDesign";
+import Header from '@components/Header/Header';
+import TextView from '@components/TextView/TextView';
+import {LOGIN_SCREEN_KEY} from '@navigation/Routes';
+import {Colors} from '@resources/Colors';
+import {CommonStyles} from '@resources/CommonStyles';
+import {Strings} from '@resources/Strings';
+import {DashboardProps, FunctionReturnAnyWithParams} from '@resources/Types';
+import React, {useCallback} from 'react';
+import {SafeAreaView, TouchableOpacity, View} from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const {
   marginHorizontalSeven,
@@ -25,7 +23,7 @@ const {
   flexDirectionRow,
 } = CommonStyles;
 
-const { EMAIL, PROFILE_DETAILS, MOBILE_NUMBER, LOGOUT } = Strings;
+const {EMAIL, PROFILE_DETAILS, MOBILE_NUMBER, LOGOUT} = Strings;
 
 const {
   white,
@@ -37,7 +35,7 @@ const {
 } = Colors;
 
 const ProfileDetails = (props: DashboardProps) => {
-  const { route, navigation } = props;
+  const {route, navigation} = props;
 
   const renderItemDataView = useCallback(
     (label: string, value: string | number, style?: object) => {
@@ -50,12 +48,12 @@ const ProfileDetails = (props: DashboardProps) => {
         </View>
       );
     },
-    []
+    [],
   );
 
   const renderUserDataView: FunctionReturnAnyWithParams = useCallback(() => {
-    const { params } = route;
-    const { email, mobileNo } = params;
+    const {params} = route;
+    const {email, mobileNo} = params;
 
     return (
       <>
@@ -64,7 +62,7 @@ const ProfileDetails = (props: DashboardProps) => {
             paddingHorizontalThree,
             paddingVerticalOne,
             marginTopFive,
-            { backgroundColor: textInputBgColor },
+            {backgroundColor: textInputBgColor},
             borderRadiusThreeHalf,
           ]}>
           {renderItemDataView(EMAIL, email)}
@@ -79,7 +77,7 @@ const ProfileDetails = (props: DashboardProps) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={[flexOne, { backgroundColor: darkBgColor }]}>
+    <SafeAreaView style={[flexOne, {backgroundColor: darkBgColor}]}>
       <View style={[flexOne, marginHorizontalSeven]}>
         <Header navigation={navigation} title={PROFILE_DETAILS} />
         {renderUserDataView()}
@@ -90,14 +88,11 @@ const ProfileDetails = (props: DashboardProps) => {
         <View
           style={[
             {
-              transform: [{ rotate: "180deg" }],
+              transform: [{rotate: '180deg'}],
             },
             marginBottomSix,
           ]}>
-          <AntDesign
-            name="logout"
-            style={{ color: errorColor, fontSize: 40 }}
-          />
+          <AntDesign name="logout" style={{color: errorColor, fontSize: 40}} />
         </View>
       </TouchableOpacity>
     </SafeAreaView>

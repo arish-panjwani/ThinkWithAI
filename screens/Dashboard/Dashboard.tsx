@@ -1,20 +1,18 @@
-/** @format */
-
-import TextView from "@components/TextView/TextView";
-import { CHAT_SCREEN_KEY, PROFILE_DETAILS_KEY } from "@navigation/Routes";
-import { Colors } from "@resources/Colors";
-import { CommonStyles } from "@resources/CommonStyles";
-import { Strings } from "@resources/Strings";
-import { DashboardProps, FunctionReturnAnyWithParams } from "@resources/Types";
-import { ResponsiveFontValue as RFValue } from "@utils/ResponsiveFonts";
+import TextView from '@components/TextView/TextView';
+import {CHAT_SCREEN_KEY, PROFILE_DETAILS_KEY} from '@navigation/Routes';
+import {Colors} from '@resources/Colors';
+import {CommonStyles} from '@resources/CommonStyles';
+import {Strings} from '@resources/Strings';
+import {DashboardProps, FunctionReturnAnyWithParams} from '@resources/Types';
+import {ResponsiveFontValue as RFValue} from '@utils/ResponsiveFonts';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
-} from "@utils/ResponsiveScreen";
-import React, { useCallback, useState } from "react";
-import { SafeAreaView, TextInput, TouchableOpacity, View } from "react-native";
-import { Button, Modal, Portal, Provider } from "react-native-paper";
-import AntDesign from "react-native-vector-icons/AntDesign";
+} from '@utils/ResponsiveScreen';
+import React, {useCallback, useState} from 'react';
+import {SafeAreaView, TextInput, TouchableOpacity, View} from 'react-native';
+import {Button, Modal, Portal, Provider} from 'react-native-paper';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const {
   flexOne,
@@ -29,26 +27,16 @@ const {
   paddingHorizontalOne,
   flexDirectionRow,
   marginHorizontalFour,
-  paddingHorizontalThree,
-  borderRadiusTwo,
-  marginTopOne,
-  borderRadiusThree,
   borderWidthPointTwo,
   paddingPointTwoFive,
   paddingHorizontalTwo,
-  marginBottomOne,
   justifyContentCenter,
   marginTopZero,
   borderWidthPointFive,
 } = CommonStyles;
 
-const {
-  DASHBOARD,
-  WELCOME_TO_FUTURE,
-  KEEP_NAME_MSG,
-  GIVE_NAME_TITLE,
-  NAME_EG,
-} = Strings;
+const {DASHBOARD, WELCOME_TO_FUTURE, KEEP_NAME_MSG, GIVE_NAME_TITLE, NAME_EG} =
+  Strings;
 
 const {
   white,
@@ -62,12 +50,12 @@ const {
 } = Colors;
 
 const Dashboard = (props: DashboardProps) => {
-  const { navigation, route } = props;
-  const { params } = route;
+  const {navigation, route} = props;
+  const {params} = route;
 
   const [showGiveNameModal, setGiveNameModal] = useState(false);
   const [showRandomNameModal, setRandomNameModal] = useState(false);
-  const [aiName, setAIName] = useState("");
+  const [aiName, setAIName] = useState('');
 
   const navigateTo = useCallback((key: any, param: any) => {
     navigation.navigate(key, param);
@@ -78,29 +66,29 @@ const Dashboard = (props: DashboardProps) => {
       title: string,
       setState?: FunctionReturnAnyWithParams,
       buttonSize?: string,
-      bgColor?: string
+      bgColor?: string,
     ) => {
       let buttonWidth = wp(40);
       switch (buttonSize) {
-        case "extraSmall":
+        case 'extraSmall':
           buttonWidth = wp(15);
           break;
-        case "small":
+        case 'small':
           buttonWidth = wp(20);
           break;
-        case "medium":
+        case 'medium':
           buttonWidth = wp(30);
           break;
-        case "large":
+        case 'large':
           buttonWidth = wp(45);
           break;
-        case "extraLarge":
+        case 'extraLarge':
           buttonWidth = wp(60);
           break;
-        case "xl":
+        case 'xl':
           buttonWidth = wp(70);
           break;
-        case "xxl":
+        case 'xxl':
           buttonWidth = wp(80);
           break;
         default:
@@ -129,7 +117,7 @@ const Dashboard = (props: DashboardProps) => {
         </TouchableOpacity>
       );
     },
-    []
+    [],
   );
 
   const renderCommonModal = useCallback(
@@ -137,18 +125,18 @@ const Dashboard = (props: DashboardProps) => {
       stateVal: boolean,
       setState: Function,
       childView: FunctionReturnAnyWithParams,
-      height?: Number
+      height?: Number,
     ) => {
       const containerStyle = {
-        backgroundColor: "white",
+        backgroundColor: 'white',
         // flex: 1,
-        height: height || "70%",
+        height: height || '70%',
         marginTop: 100,
       };
 
       return (
         <Portal>
-          <View style={{ flex: 1 }}>
+          <View style={{flex: 1}}>
             <Modal
               visible={stateVal}
               onDismiss={undefined}
@@ -160,10 +148,10 @@ const Dashboard = (props: DashboardProps) => {
                   backgroundColor: textInputBgColor,
                   borderRadius: 20,
                   margin: 20,
-                  borderColor: "teal",
+                  borderColor: 'teal',
                 },
               ]}>
-              <View style={{ flex: 1 }}>{childView()}</View>
+              <View style={{flex: 1}}>{childView()}</View>
               <TouchableOpacity
                 onPress={() => {
                   setState(false);
@@ -172,11 +160,11 @@ const Dashboard = (props: DashboardProps) => {
                   height: 50,
                   width: 50,
                   borderRadius: 50,
-                  backgroundColor: "teal",
-                  position: "absolute",
+                  backgroundColor: 'teal',
+                  position: 'absolute',
                   bottom: -80,
-                  alignItems: "center",
-                  justifyContent: "center",
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}>
                 <TextView color={white} subHeading>
                   X
@@ -187,24 +175,24 @@ const Dashboard = (props: DashboardProps) => {
         </Portal>
       );
     },
-    []
+    [],
   );
 
   const onPressStartChatting = useCallback(() => {
     setGiveNameModal(false);
-    navigateTo(CHAT_SCREEN_KEY, { title: aiName });
+    navigateTo(CHAT_SCREEN_KEY, {title: aiName});
   }, []);
 
   const giveNameView = useCallback(() => {
     const errorStyle = false
       ? [
-          { borderColor: errorColor },
+          {borderColor: errorColor},
           paddingPointTwoFive,
           borderRadiusThreeHalf,
           borderWidthPointTwo,
         ]
       : [
-          { borderColor: white, borderBottomWidth: hp(0.05) },
+          {borderColor: white, borderBottomWidth: hp(0.05)},
           paddingHorizontalTwo,
         ];
     return (
@@ -219,7 +207,7 @@ const Dashboard = (props: DashboardProps) => {
           <View style={[errorStyle]}>
             <TextInput
               value={aiName}
-              onChangeText={(val) => setAIName(val)}
+              onChangeText={val => setAIName(val)}
               placeholder={NAME_EG}
               placeholderTextColor={placeHolderColor}
               // autoCapitalize={"none"}
@@ -231,8 +219,8 @@ const Dashboard = (props: DashboardProps) => {
                   fontSize: RFValue(19),
                   color: commonTextColor,
                   backgroundColor: textInputBgColor,
-                  flexWrap: "wrap",
-                  fontWeight: "bold",
+                  flexWrap: 'wrap',
+                  fontWeight: 'bold',
                 },
               ]}
             />
@@ -254,17 +242,17 @@ const Dashboard = (props: DashboardProps) => {
     return (
       <View style={marginTopFour}>
         {commonButtonView(
-          "Give a Name 🤩",
+          'Give a Name 🤩',
           setGiveNameModal,
-          "large",
-          undefined
+          'large',
+          undefined,
         )}
         {/* {onGiveNamePress()} */}
         {commonButtonView(
-          "Get Random 🙈",
+          'Get Random 🙈',
           setRandomNameModal,
-          "large",
-          undefined
+          'large',
+          undefined,
         )}
       </View>
     );
@@ -276,7 +264,7 @@ const Dashboard = (props: DashboardProps) => {
 
   return (
     <Provider>
-      <SafeAreaView style={[flexOne, { backgroundColor: darkBgColor }]}>
+      <SafeAreaView style={[flexOne, {backgroundColor: darkBgColor}]}>
         <View style={[flexOne]}>
           <View
             style={[
@@ -295,7 +283,7 @@ const Dashboard = (props: DashboardProps) => {
             <TouchableOpacity onPress={onSettingsPress}>
               <AntDesign
                 name="setting"
-                style={{ color: primaryColor, fontSize: 35 }}
+                style={{color: primaryColor, fontSize: 35}}
               />
             </TouchableOpacity>
           </View>
@@ -324,7 +312,7 @@ const Dashboard = (props: DashboardProps) => {
           showGiveNameModal,
           setGiveNameModal,
           giveNameView,
-          "60%"
+          '60%',
         )}
 
       {/* Random Name Modal */}
@@ -332,7 +320,7 @@ const Dashboard = (props: DashboardProps) => {
         renderCommonModal(
           showRandomNameModal,
           setRandomNameModal,
-          randomNameView
+          randomNameView,
         )}
     </Provider>
   );
