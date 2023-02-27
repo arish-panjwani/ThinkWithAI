@@ -2,6 +2,12 @@ import {ResponsiveFontValue as RFValue} from '@utils/ResponsiveFonts';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
+  fontLargeHeading: {
+    fontSize: RFValue(35),
+  },
+  fontHeading: {
+    fontSize: RFValue(32),
+  },
   fontSubHeading: {
     fontSize: RFValue(28),
   },

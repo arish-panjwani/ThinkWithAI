@@ -41,6 +41,8 @@ export type HeaderProps = {navigation: any; title: string};
 export type TextViewProps = {
   children: string | number;
   style?: ObjectOrArray;
+  largeHeading?: boolean;
+  heading?: boolean;
   subHeading?: boolean;
   largeTitle?: boolean;
   title?: boolean;

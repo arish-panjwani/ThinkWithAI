@@ -13,6 +13,8 @@ const TextView = (props: TextViewProps) => {
 
   const renderTextView = () => {
     const {
+      fontLargeHeading,
+      fontHeading,
       fontSubHeading,
       fontLargeTitle,
       fontTitle,
@@ -31,6 +33,8 @@ const TextView = (props: TextViewProps) => {
     const {
       children,
       style,
+      largeHeading,
+      heading,
       subHeading,
       largeTitle,
       title,
@@ -66,7 +70,14 @@ const TextView = (props: TextViewProps) => {
     ];
 
     let defaultColor = textColor;
-    if (subHeading) {
+    if (largeHeading) {
+      defaultStyle = [
+        {fontSize: getTextSizes(fontLargeHeading)},
+        defaultWeight,
+      ];
+    } else if (heading) {
+      defaultStyle = [{fontSize: getTextSizes(fontHeading)}, defaultWeight];
+    } else if (subHeading) {
       defaultStyle = [{fontSize: getTextSizes(fontSubHeading)}, defaultWeight];
     } else if (largeTitle) {
       defaultStyle = [{fontSize: getTextSizes(fontLargeTitle)}, defaultWeight];

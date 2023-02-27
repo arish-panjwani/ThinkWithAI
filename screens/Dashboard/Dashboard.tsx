@@ -32,10 +32,18 @@ const {
   justifyContentCenter,
   marginTopZero,
   borderWidthPointFive,
+  marginRightTwo,
 } = CommonStyles;
 
-const {DASHBOARD, WELCOME_TO_FUTURE, KEEP_NAME_MSG, GIVE_NAME_TITLE, NAME_EG} =
-  Strings;
+const {
+  DASHBOARD,
+  WELCOME_TO_FUTURE,
+  KEEP_NAME_MSG,
+  GIVE_NAME_TITLE,
+  NAME_EG,
+  CHATBOT_NAMES_ARR,
+  EMOTICONS_ARR,
+} = Strings;
 
 const {
   white,
@@ -45,7 +53,7 @@ const {
   placeHolderColor,
   commonTextColor,
   errorColor,
-  black,
+  chattingButtonColor,
 } = Colors;
 
 const Dashboard = (props: DashboardProps) => {
@@ -56,16 +64,20 @@ const Dashboard = (props: DashboardProps) => {
   const [showRandomNameModal, setRandomNameModal] = useState(false);
   const [aiName, setAIName] = useState('');
 
-  const navigateTo = useCallback((key: any, param: any) => {
-    navigation.navigate(key, param);
-  }, []);
+  const navigateTo = useCallback(
+    (key: any, param: any) => {
+      navigation.navigate(key, param);
+    },
+    [navigation],
+  );
 
   const commonButtonView = useCallback(
     (
       title: string,
-      setState?: FunctionReturnAnyWithParams,
+      onPress?: FunctionReturnAnyWithParams,
       buttonSize?: string,
       bgColor?: string,
+      isSetState: boolean = true,
     ) => {
       let buttonWidth = wp(40);
       switch (buttonSize) {
@@ -94,9 +106,10 @@ const Dashboard = (props: DashboardProps) => {
           buttonWidth = wp(40);
           break;
       }
+
       return (
         <TouchableOpacity
-          onPress={() => setState!(true)}
+          onPress={() => onPress!(isSetState ? true : undefined)}
           style={[
             {
               backgroundColor: bgColor || primaryColor,
@@ -153,6 +166,7 @@ const Dashboard = (props: DashboardProps) => {
               <View style={{flex: 1}}>{childView()}</View>
               <TouchableOpacity
                 onPress={() => {
+                  setAIName('');
                   setState(false);
                 }}
                 style={{
@@ -179,9 +193,9 @@ const Dashboard = (props: DashboardProps) => {
 
   const onPressStartChatting = useCallback(() => {
     setGiveNameModal(false);
-    console.info('aiName', aiName);
+    setRandomNameModal(false);
     navigateTo(CHAT_SCREEN_KEY, {title: aiName});
-  }, [aiName]);
+  }, [aiName, navigateTo]);
 
   const giveNameView = useCallback(() => {
     const errorStyle = false
@@ -234,9 +248,53 @@ const Dashboard = (props: DashboardProps) => {
         </View>
       </View>
     );
-  }, [aiName]);
+  }, [aiName, onPressStartChatting]);
 
-  const randomNameView = useCallback(() => {}, []);
+  const getRandomVal = useCallback((arr: Record<any, any>) => {
+    const randomArrIndex = Math.ceil(Math.random() * arr.length) - 1;
+    const randomVal = arr[randomArrIndex] || arr[2];
+    return randomVal;
+  }, []);
+
+  const getRandomName = useCallback(() => {
+    const randomName = getRandomVal(CHATBOT_NAMES_ARR);
+    setAIName(randomName);
+  }, [getRandomVal]);
+
+  const randomNameView = useCallback(() => {
+    return (
+      <View style={[marginHorizontalFour]}>
+        <TextView
+          style={[marginTopFour, textAlignCenter]}
+          color={white}
+          largeTitle>
+          {'Your auto-selected AI Buddy Name is '}
+        </TextView>
+        <View style={[marginTopThree, justifyContentCenter, alignItemsCenter]}>
+          <TextView style={textAlignCenter} color={primaryColor} bold title>
+            {`${aiName.toUpperCase()} ${getRandomVal(EMOTICONS_ARR)}`}
+          </TextView>
+          <View style={[flexDirectionRow, marginTopFour]}>
+            <TouchableOpacity
+              onPress={getRandomName}
+              style={[marginRightTwo, justifyContentCenter]}>
+              <TextView color={chattingButtonColor} largeHeading>
+                ⟳
+              </TextView>
+            </TouchableOpacity>
+            <Button mode="elevated" onPress={onPressStartChatting}>
+              Start Chatting
+            </Button>
+          </View>
+        </View>
+      </View>
+    );
+  }, [aiName, getRandomName, getRandomVal, onPressStartChatting]);
+
+  const onPressRandom = useCallback(() => {
+    getRandomName();
+    setRandomNameModal(true);
+  }, [getRandomName]);
 
   const featuresView = useCallback(() => {
     return (
@@ -250,17 +308,18 @@ const Dashboard = (props: DashboardProps) => {
         {/* {onGiveNamePress()} */}
         {commonButtonView(
           'Get Random 🙈',
-          setRandomNameModal,
+          onPressRandom,
           'large',
           undefined,
+          false,
         )}
       </View>
     );
-  }, [commonButtonView]);
+  }, [commonButtonView, onPressRandom]);
 
   const onSettingsPress = useCallback(() => {
     navigateTo(PROFILE_DETAILS_KEY, params);
-  }, []);
+  }, [navigateTo, params]);
 
   return (
     <Provider>
@@ -334,6 +393,7 @@ const Dashboard = (props: DashboardProps) => {
           showRandomNameModal,
           setRandomNameModal,
           randomNameView,
+          '60%',
         )}
     </Provider>
   );

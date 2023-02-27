@@ -12,4 +12,5 @@ export const Colors = {
   textInputBgColor: '#1D1D1D',
   textInputColor: '#808080',
   placeHolderColor: '#858585',
+  chattingButtonColor: '#AA60AA',
 };
